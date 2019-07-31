@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "959863037351",
+    "firebase_url": "https://uptickmarketplace-f31e9.firebaseio.com",
+    "project_id": "uptickmarketplace-f31e9",
+    "storage_bucket": "uptickmarketplace-f31e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959863037351:android:7ba756b135397e83",
+        "android_client_info": {
+          "package_name": "com.example.android.uptick_marketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959863037351-gjmhi49qc966olbcts0chhrfau0lvl4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7W2LE6KQ5bJiBSa9FoLSJEFcyrvZHPS4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959863037351-gjmhi49qc966olbcts0chhrfau0lvl4h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "959863037351-3asrbtuovoc883uie9nbooetl7js0bds.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "uptick.Uptick-iOS"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
