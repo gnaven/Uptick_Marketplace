@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "959863037351-i2l1a2jvu4267okeq4lvhs7dnb831qrv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.uptick_marketplace",
+            "certificate_hash": "77fac2baa0356bf386e5d3da8d3556418e05e7a3"
+          }
+        },
+        {
           "client_id": "959863037351-gjmhi49qc966olbcts0chhrfau0lvl4h.apps.googleusercontent.com",
           "client_type": 3
         }

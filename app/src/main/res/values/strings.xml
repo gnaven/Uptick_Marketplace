@@ -25,8 +25,40 @@
     </string>
 
     <string-array name="university_name_array">
-        <item>Select one</item>
+        <item>Select University</item>
         <item>University of Rochester</item>
         <item>Rochester Institute of Technology</item>
+    </string-array>
+
+    <string-array name="dorm_array">
+        <item>Select Dorm</item>
+        <item>Susan B. Anthony Halls</item>
+        <item>Gilbert</item>
+        <item>Hoeing</item>
+        <item>Brooks</item>
+        <item>Lovejoy</item>
+        <item>Tiernen</item>
+        <item>Burton</item>
+        <item>Crosby</item>
+        <item>Riverview</item>
+        <item>OBrien</item>
+        <item>Anderson</item>
+        <item>Wilder</item>
+        <item>Hill Court - Chamber</item>
+        <item>Hill Court - Munroe</item>
+        <item>Hill Court - Fairchild</item>
+        <item>Hill Court - Gale</item>
+        <item>Hill Court - Kendrick</item>
+        <item>Hill Court - Slater</item>
+        <item>Southside - DeKeiwiet</item>
+        <item>Southside - Maisonnettes</item>
+        <item>Southside - Valentine</item>
+        <item>Off-Campus</item>
+        <item>Goler</item>
+        <item>Whipple Park</item>
+        <item>University Park</item>
+
+
+
     </string-array>
 </resources>

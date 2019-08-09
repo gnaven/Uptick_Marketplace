@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".ActivitySignUp"
     >
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -27,7 +27,7 @@
             android:textAppearance="@android:style/TextAppearance.WindowTitle"
             android:visibility="visible" />
 
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/sigup_form"
@@ -67,6 +67,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="30dp"
             android:hint="University Email"
+            android:inputType="textEmailAddress"
             />
 
         <EditText
@@ -90,11 +91,58 @@
 
             />
 
+        <Spinner
+            android:id="@+id/dorm_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Select Dorm"
+
+            />
+
+        <EditText
+            android:id="@+id/type_sign_up_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            />
+        <EditText
+            android:id="@+id/type_sign_up_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:hint="Confirm Password"
+            android:inputType="textPassword"
+            />
+        <Button
+            android:id="@+id/sign_up_continue_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:text="Continue"
+            />
+
 
     </LinearLayout>
-
-
-
+    <ProgressBar
+        android:id="@+id/sign_up_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        android:indeterminateTint="@color/colorPrimaryDark"/>
 
 
 
