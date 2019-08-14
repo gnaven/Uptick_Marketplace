@@ -52,11 +52,12 @@
             android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/product_name"
+            android:backgroundTint="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addproduct_picture_button"
             android:layout_width="147dp"
             android:layout_height="wrap_content"
             android:text="Add Picture"
@@ -153,6 +154,7 @@
             android:id="@+id/product_price"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
+            android:hint="$"
             android:layout_marginRight="50dp" />
 
 
