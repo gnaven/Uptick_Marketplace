@@ -95,7 +95,6 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
             return;
         }
 
-
         if(password.isEmpty()){
             PasswordText.setError("Password is required");
             PasswordText.requestFocus();
