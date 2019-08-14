@@ -29,6 +29,7 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
     private Button SignUpButton;
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     @Override
@@ -36,6 +37,7 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
+
 
         // Setting up University Name Spinner
         Spinner UnivSpinner = (Spinner) findViewById(R.id.university_spinner);
@@ -117,13 +119,29 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    finish();
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    
-
+//              TODO: Implement Email verification; current problem is figuring out if AuthStateListener is working
+//                    mAuthListener = new FirebaseAuth.AuthStateListener() {
+//                        @Override
+//                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                            Toast.makeText(getApplicationContext(),"Verifying Email", Toast.LENGTH_SHORT).show();
+//                            FirebaseUser user = firebaseAuth.getCurrentUser();
+//                            if (user != null) {
+//                                // User is signed in
+//                                // NOTE: this Activity should get onpen only when the user is not signed in, otherwise
+//                                // the user will receive another verification email.
+//
+//                                sendVerificationEmail();
+//                            }
+//
+//                        }
+//                    };
                     progressBar.setVisibility(View.GONE);
+                    finish();
+
                     Toast.makeText(getApplicationContext(),"Sign Up is successful", Toast.LENGTH_SHORT).show();
+
                     startActivity(new Intent(ActivitySignUp.this, Main_Activity.class));
+
                 }else{
                     SignUpButton.setEnabled(true);
                     if (task.getException() instanceof FirebaseAuthUserCollisionException){
@@ -137,6 +155,43 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
             }
         });
 
+    }
+
+    private void sendVerificationEmail() {
+        /*
+        ------------------------------------------------------------------------------
+         In this method, Firebase auto generates email verification link to be sent to
+         user's email
+        ------------------------------------------------------------------------------
+        */
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // email sent
+                            // after email is sent just logout the user and finish this activity
+                            FirebaseAuth.getInstance().signOut();
+                            startActivity(new Intent(ActivitySignUp.this, ActivityLogin.class));
+                            finish();
+                        }
+                        else
+                        {
+                            // email not sent, so display message and restart the activity
+                            Toast.makeText(getApplicationContext(),"Sending Email was unsuccessful, please use a valid email",
+                                    Toast.LENGTH_SHORT).show();
+                            //restart this activity
+                            overridePendingTransition(0, 0);
+                            finish();
+                            overridePendingTransition(0, 0);
+                            startActivity(getIntent());
+
+                        }
+                    }
+                });
     }
 
     @Override

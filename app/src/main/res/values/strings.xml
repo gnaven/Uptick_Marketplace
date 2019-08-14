@@ -58,7 +58,15 @@
         <item>Whipple Park</item>
         <item>University Park</item>
 
+    </string-array>
 
+    <string-array name="product_category_array">
+        <item>Electronics</item>
+        <item>Books</item>
+        <item>Furniture</item>
+        <item>Clothing</item>
+        <item>Kitchen</item>
 
     </string-array>
+
 </resources>

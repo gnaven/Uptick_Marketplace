@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.appcompat.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +28,10 @@ public class Home extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent sell_activity = new Intent(getActivity(), Sell.class);
+                Intent sell_activity = new Intent(getActivity(), ProductListing.class);
                 startActivity(sell_activity);
                 //Toolbar toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-                //toolbartext.setText("Sell");
+                //toolbartext.setText("ProductListing");
                 //Toast.makeText(getActivity(), "Clicked Profile Button", Toast.LENGTH_SHORT).show();
             }
         });

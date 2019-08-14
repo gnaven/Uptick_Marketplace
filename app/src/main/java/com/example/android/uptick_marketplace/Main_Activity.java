@@ -157,6 +157,10 @@ public class Main_Activity extends AppCompatActivity
         } else if (id == R.id.nav_contact){
             fragment = new Contact_Us();
             toolbartext.setText("Contact Us");
+        }else if(id == R.id.logout){
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            startActivity(new Intent(this, ActivityLogin.class));
         }
         loadFragment(fragment);
 
