@@ -31,21 +31,21 @@
             android:parentActivityName=".Main_Activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Main_Activity" />
+                android:value=".Main_Activity"/>
         </activity>
         <activity
-            android:name=".ActivitySignUp">
+            android:name=".ActivitySignUp"
             android:parentActivityName=".ActivityLogin">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ActivityLogin" />
+                android:value=".ActivityLogin"/>
         </activity>
         <activity
-            android:name=".Main_Activity">
+            android:name=".Main_Activity"
             android:parentActivityName=".ActivitySignUp">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ActivitySignUp" />
+                android:value=".ActivitySignUp"/>
         </activity>
 
     </application>
