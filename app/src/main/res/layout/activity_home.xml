@@ -8,12 +8,25 @@
 
     <TextView
         android:id="@+id/home_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Home"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="30dp"
+        android:text="Newly Added Products"
+        android:textAllCaps="true"
+        android:textSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="5dp" />
+        tools:layout_editor_absoluteY="5dp"
+        />
+
+    <GridView
+        android:id="@+id/gv"
+        android:layout_width="match_parent"
+        android:layout_height="276dp"
+        android:layout_marginTop="60dp"
+        android:footerDividersEnabled="false"
+        android:numColumns="3" />
 
     <Button
         android:id="@+id/list_item"
