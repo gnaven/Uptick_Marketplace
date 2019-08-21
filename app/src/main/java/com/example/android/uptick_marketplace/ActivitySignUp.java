@@ -37,6 +37,7 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         mAuth = FirebaseAuth.getInstance();
+        //TODO: Add prodile info to profile collection in firestore
 
 
         // Setting up University Name Spinner

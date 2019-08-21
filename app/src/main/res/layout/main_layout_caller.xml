@@ -29,4 +29,6 @@
         android:textColor="@color/black"
         app:menu="@menu/hamburger_menu_contents" />
 
+
+
 </androidx.drawerlayout.widget.DrawerLayout>

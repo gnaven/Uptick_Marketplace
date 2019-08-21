@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/listing_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        style="@style/HeaderBar"
+        android:elevation="4dp">
+        <TextView
+            android:id="@+id/toolbar_listing_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="Product Detail"
+            android:textColor="@color/black"
+            android:textAppearance="@android:style/TextAppearance.WindowTitle"
+            android:visibility="visible" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@+id/product_detail_center_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="60dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/product_detail_info_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <ImageView
+                    android:id="@+id/product_detail_image"
+                    android:layout_width="240dp"
+                    android:layout_height="260dp"
+                    android:padding="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_launcher_round" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/product_details_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Product Name"
+                        android:textSize="30dp"
+                        android:layout_marginTop="5dp"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:id="@+id/product_details_condition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Great Condition"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        />
+                    <TextView
+                        android:id="@+id/product_details_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="$0"
+                        android:textSize="28dp"
+                        android:textColor="@color/black"
+                        />
+
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/product_details_description_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@+id/product_detail_info_section"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Description"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:id="@+id/product_details_description_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description of the product here"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    />
+                <TextView
+                    android:id="@+id/product_detail_seller_name"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sold by Uptick Seller"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/product_details_owner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="vertical"
+                android:layout_below="@+id/product_details_description_layout"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Product Status"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/product_details_listing_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Listed 2 days ago"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:stretchColumns="*">
+
+                    <TableRow
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+                        <Button
+                            android:id="@+id/product_detail_mark_sold"
+                            android:text="Mark as Sold"
+                            android:backgroundTint="#5ec639"
+                            />
+                        <Button
+                            android:id="@+id/product_detail_put_hold"
+                            android:text="Put On Hold"
+                            />
+
+
+                    </TableRow>
+                </TableLayout>
+
+                <Button
+                    android:id="@+id/product_details_delete_listing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Delete Listing"
+                    android:backgroundTint="#FF0000"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

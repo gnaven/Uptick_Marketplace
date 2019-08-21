@@ -33,8 +33,10 @@
     </androidx.appcompat.widget.Toolbar>
 
 
-
-    <include layout="@layout/content_hamburger_menu" />
+    <include
+        layout="@layout/content_hamburger_menu"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        />
 
 
 
