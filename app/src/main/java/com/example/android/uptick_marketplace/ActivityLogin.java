@@ -28,9 +28,9 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         EmailText = findViewById(R.id.type_email);
         PasswordText = findViewById(R.id.type_password);
 
@@ -40,12 +40,9 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         SignUpButton.setOnClickListener(this);
         progressBar = findViewById(R.id.login_progressbar);
 
-
         findViewById(R.id.forgot_pass_button).setOnClickListener(this);
 
         mAuth = FirebaseAuth.getInstance();
-
-
 
     }
 

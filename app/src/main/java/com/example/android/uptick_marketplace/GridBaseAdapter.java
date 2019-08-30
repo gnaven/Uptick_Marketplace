@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.storage.StorageReference;
+
 import java.util.ArrayList;
 
 public class GridBaseAdapter extends BaseAdapter {
@@ -17,10 +20,13 @@ public class GridBaseAdapter extends BaseAdapter {
     private ImageView ivGallery;
     private TextView textView;
 
-    public GridBaseAdapter(Context ctx, ArrayList<ImageModel> imageModelArrayList) {
+    private ArrayList<StorageReference> storageReferenceList;
+
+    public GridBaseAdapter(Context ctx, ArrayList<ImageModel> imageModelArrayList, ArrayList<StorageReference> storageReferenceList) {
 
         this.ctx = ctx;
         this.imageModelArrayList = imageModelArrayList;
+        this.storageReferenceList = storageReferenceList;
     }
 
     @Override
@@ -49,9 +55,15 @@ public class GridBaseAdapter extends BaseAdapter {
         ivGallery = (ImageView) itemView.findViewById(R.id.ivGallery);
         textView = (TextView) itemView.findViewById(R.id.tv);
 
-        ivGallery.setImageResource(imageModelArrayList.get(position).getImage_drawable());
+//        GlideApp.with(ctx)
+//                .load(storageReferenceList.get(position))
+//                .into(ivGallery);
+
+        //ivGallery.setImageResource(imageModelArrayList.get(position).getImage_drawable());
         textView.setText(imageModelArrayList.get(position).getName());
 
         return itemView;
     }
+
+
 }

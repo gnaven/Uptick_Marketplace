@@ -3,6 +3,7 @@ package com.example.android.uptick_marketplace;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -36,6 +37,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -57,6 +59,8 @@ public class ProductListing extends AppCompatActivity implements AdapterView.OnI
     StorageReference storageReference;
     private FirebaseFirestore db;
 
+    String doc_id;
+
 
     private EditText productName, productDescription, productPrice;
     private Button addPictureButton, greatConditionButton, goodConditionButton, workingConditionButton, confirmListingButton;
@@ -69,7 +73,6 @@ public class ProductListing extends AppCompatActivity implements AdapterView.OnI
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
 
@@ -156,7 +159,7 @@ public class ProductListing extends AppCompatActivity implements AdapterView.OnI
             // TODO: Need to fix uploading pictures to db. Look into binary image loading
             storageReference = storage.getInstance().getReference();
             //Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-            StorageReference ref = storageReference.child("product_photos/"+ user.getUid().toString()+ "/"+listing_filepath.getLastPathSegment()+".jpg");
+            StorageReference ref = storageReference.child("product_photos/"+ user.getUid().toString()+ "/"+doc_id+".jpg");
             Toast.makeText(ProductListing.this, "Upload ing image", Toast.LENGTH_SHORT).show();
             ref.putFile(listing_filepath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -231,10 +234,15 @@ public class ProductListing extends AppCompatActivity implements AdapterView.OnI
                 product.put("price", prodPrice);
                 product.put("UserID", user.getUid());
                 product.put("available", true);
-                if (listing_filepath !=null){product.put("image_filepath",listing_filepath.toString());}
 
-                uploadImage();
-                String doc_id = db.collection("products").document().getId();
+                doc_id = db.collection("products").document().getId();
+
+                if (listing_filepath !=null){
+                    product.put("image_filepath",listing_filepath.toString());
+                    product.put("storage_path","product_photos/"+ user.getUid().toString()+ "/"+doc_id+".jpg");
+                }
+
+
                 db.collection("products")
                         .document(doc_id)
                         .set(product)
@@ -250,7 +258,7 @@ public class ProductListing extends AppCompatActivity implements AdapterView.OnI
                                 Toast.makeText(getApplicationContext(),"Failed to list product", Toast.LENGTH_SHORT).show();
                             }
                         });
-
+                uploadImage();
 
                 product.put("document_id", doc_id);
                 Intent product_details = new Intent(ProductListing.this, ProductListingDetail.class);

@@ -173,8 +173,8 @@
                         <Button
                             android:id="@+id/product_detail_put_hold"
                             android:text="Put On Hold"
-                            />
 
+                            />
 
                     </TableRow>
                 </TableLayout>

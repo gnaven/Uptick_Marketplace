@@ -17,31 +17,42 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ActivitySignUp extends Activity implements AdapterView.OnItemSelectedListener, View.OnClickListener{
-    private EditText EmailText;
-    private EditText PasswordText;
+    private EditText EmailText, PasswordText, fName, lName, mobNum;
+    Spinner UnivSpinner, DormSpinner;
+    String univText,dormText;
     private Button SignUpButton;
+
     private FirebaseAuth mAuth;
     private ProgressBar progressBar;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    FirebaseUser user;
+    private FirebaseFirestore db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        mAuth = FirebaseAuth.getInstance();
-        //TODO: Add prodile info to profile collection in firestore
+        setTitle("");
 
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         // Setting up University Name Spinner
-        Spinner UnivSpinner = (Spinner) findViewById(R.id.university_spinner);
+        UnivSpinner = (Spinner) findViewById(R.id.university_spinner);
         UnivSpinner.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> UnivAdapter = ArrayAdapter.createFromResource(this,
@@ -50,7 +61,7 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
         UnivSpinner.setAdapter(UnivAdapter);
 
         // Setting up Dorm Spinner
-        Spinner DormSpinner = (Spinner) findViewById(R.id.dorm_spinner);
+        DormSpinner = (Spinner) findViewById(R.id.dorm_spinner);
         DormSpinner.setOnItemSelectedListener(this);
 
         ArrayAdapter<CharSequence> DormAdapter = ArrayAdapter.createFromResource(this,
@@ -63,14 +74,18 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
 
         EmailText = (EditText)findViewById(R.id.type_signup_email);
         PasswordText = (EditText) findViewById(R.id.type_sign_up_confirm_password);
+        fName = findViewById(R.id.type_fname);
+        lName = findViewById(R.id.type_lname);
+        mobNum = findViewById(R.id.type_mobilenum);
 
         progressBar = findViewById(R.id.sign_up_progressbar);
-
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        univText = UnivSpinner.getSelectedItem().toString();
+        dormText = DormSpinner.getSelectedItem().toString();
 
     }
 
@@ -79,9 +94,44 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
 
     }
 
+    private void addUserProfile(){
+
+        //user = mAuth.getInstance().getCurrentUser();
+        Map<String, Object> profile = new HashMap<>();
+        if (user!= null){profile.put("UserID", user.getUid());}
+        profile.put("First Name",fName.getText().toString().trim());
+        profile.put("Last Name", lName.getText().toString().trim());
+        profile.put("email", EmailText.getText().toString().trim());
+        profile.put("Mobile Number", mobNum.getText().toString().trim());
+        profile.put("University Name", univText);
+        profile.put("Dorm Name", dormText);
+
+        String doc_id = db.collection("users").document(user.getUid()).getId();
+        db.collection("users")
+                .document(doc_id)
+                .set(profile)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(),"Profile Info added", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getApplicationContext(),"Failed to add Profile", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        startActivity(new Intent(ActivitySignUp.this, Main_Activity.class));
+
+
+    }
+
     private void registerUser(){
         String email =EmailText.getText().toString().trim();
         String password = PasswordText.getText().toString().trim();
+
 
         if (email.isEmpty()){
             EmailText.setError("Email is required");
@@ -120,6 +170,10 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
+
+                    user = mAuth.getCurrentUser();
+                    addUserProfile();
+
 //              TODO: Implement Email verification; current problem is figuring out if AuthStateListener is working
 //                    mAuthListener = new FirebaseAuth.AuthStateListener() {
 //                        @Override
@@ -141,7 +195,7 @@ public class ActivitySignUp extends Activity implements AdapterView.OnItemSelect
 
                     Toast.makeText(getApplicationContext(),"Sign Up is successful", Toast.LENGTH_SHORT).show();
 
-                    startActivity(new Intent(ActivitySignUp.this, Main_Activity.class));
+
 
                 }else{
                     SignUpButton.setEnabled(true);

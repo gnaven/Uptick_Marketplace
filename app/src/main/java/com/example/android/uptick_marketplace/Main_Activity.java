@@ -30,6 +30,8 @@ public class Main_Activity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
+        setTitle("");
+
 
         setContentView(R.layout.main_layout_caller);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
