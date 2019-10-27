@@ -1,42 +1,57 @@
 package com.example.android.uptick_marketplace;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GridBaseAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private Context ctx;
-    private ArrayList<ImageModel> imageModelArrayList;
+    private HashMap<String,Object> imageNameArrayList;
     private ImageView ivGallery;
     private TextView textView;
+    ArrayList<byte[]> imageBytesList;
 
     private ArrayList<StorageReference> storageReferenceList;
+    FirebaseStorage storage;
+    HashMap<Integer, HashMap<String, Object>> productList;
 
-    public GridBaseAdapter(Context ctx, ArrayList<ImageModel> imageModelArrayList, ArrayList<StorageReference> storageReferenceList) {
+    public GridBaseAdapter(Context ctx, HashMap<String, Object> imageNameArrayList,
+                           ArrayList<StorageReference> storageReferenceList,
+                           ArrayList<byte[]> imageBytesList,
+                           HashMap<Integer, HashMap<String, Object>> productList) {
 
         this.ctx = ctx;
-        this.imageModelArrayList = imageModelArrayList;
+        this.imageNameArrayList = imageNameArrayList;
         this.storageReferenceList = storageReferenceList;
+        this.imageBytesList = imageBytesList;
+        this.productList=productList;
     }
 
     @Override
     public int getCount() {
-        return imageModelArrayList.size();
+        return imageNameArrayList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return imageModelArrayList.get(position);
+        return imageNameArrayList.get(position);
     }
 
     @Override
@@ -51,19 +66,28 @@ public class GridBaseAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View itemView = inflater.inflate(R.layout.grid_item, parent, false);
-
+        
         ivGallery = (ImageView) itemView.findViewById(R.id.ivGallery);
         textView = (TextView) itemView.findViewById(R.id.tv);
+        final long ONE_MEGABYTE = 1024 * 1024;
+        // download file as a byte array
+        storage = FirebaseStorage.getInstance();
+//        StorageReference storageReference = storage
+//                .getReferenceFromUrl("gs://uptickmarketplace-f31e9.appspot.com/product_photos/F1WBbp3sIrNuXSR3PyUtp2HylQz2/HvXuQarf9ZVjW5SD72NA.jpg");
 
-//        GlideApp.with(ctx)
-//                .load(storageReferenceList.get(position))
-//                .into(ivGallery);
+        //StorageReference storageReference = storageReferenceList.get(position);
 
-        //ivGallery.setImageResource(imageModelArrayList.get(position).getImage_drawable());
-        textView.setText(imageModelArrayList.get(position).getName());
+        HashMap<String,Object> productDetail = productList.get(position);
+        byte[] imageBytes = (byte[]) productDetail.get("imageBytes");
+
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0,
+                imageBytes.length);
+        ivGallery.setImageBitmap(bitmap);
+
+
+        textView.setText(productDetail.get("name").toString());
 
         return itemView;
     }
-
 
 }

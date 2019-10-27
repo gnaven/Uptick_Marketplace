@@ -19,30 +19,26 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="5dp"
         />
+    <ProgressBar
+        android:id="@+id/home_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/home_text"
+        android:layout_centerVertical="true"
+        android:indeterminateTint="@color/colorPrimaryDark"/>
 
     <GridView
         android:id="@+id/gv"
         android:layout_width="match_parent"
         android:layout_height="276dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/home_text"
         android:footerDividersEnabled="false"
         android:numColumns="3" />
 
-    <ImageView
-        android:id="@+id/test_product_image"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:padding="10dp"
-        android:scaleType="fitXY"
-        android:layout_below="@+id/gv"
-        android:src="@mipmap/ic_launcher_round" />
-    <TextView
-        android:id="@+id/test_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/test_product_image"
-        />
+
     <Button
         android:id="@+id/list_item"
         android:layout_width="match_parent"

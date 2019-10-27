@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -115,8 +117,16 @@ public class ProductListingDetail extends AppCompatActivity implements View.OnCl
         seller_name.setText("Sold by "+ownerName);
 
         product_image = findViewById(R.id.product_detail_image);
-        Uri fileUri = Uri.parse(productInfo.get("image_filepath").toString());
-        product_image.setImageURI(fileUri);
+        if (productInfo.get("image_filepath")!= null){
+            Uri fileUri = Uri.parse(productInfo.get("image_filepath").toString());
+            product_image.setImageURI(fileUri);
+        }
+//        else{
+//            byte[] image_bytes = getIntent().getByteArrayExtra("Image_Byte");
+//            Bitmap bitmap = BitmapFactory.decodeByteArray(image_bytes, 0,
+//                    image_bytes.length);
+//            product_image.setImageBitmap(bitmap);
+//        }
 
         doc_id = productInfo.get("document_id").toString();
 
